@@ -43,7 +43,7 @@ body.active{overflow:hidden;z-index:-1}
         left:0;
         right:0;
         text-align:center;
-        z-index:10;
+        z-index:500;
         animation-name:dropHeader;
         animation-iteration-count:1;
         animation-timing-function:ease;
@@ -454,6 +454,37 @@ body.active{overflow:hidden;z-index:-1}
             color:#74808a;
             font-size:0.9em;}
         .optional-section-block ul{padding:0 0 0 15px}
+        .code-box{
+            margin: 10px;
+            padding: 15px;
+            background-color: #374054;
+            color: khaki;
+            font-size: 0.9em;
+            text-align:left;
+        }
+        .code-box span.commenttext{
+            text-decoration: dashed;
+            font-style: italic;
+            color: #a0cfee;
+        }
+        .code-box span.importtext{
+            color: rgb(74, 148, 0);
+            font-weight:900;
+            font-size: 1.05em;
+        }
+        .explaindiv {
+            margin: auto;
+            background-color: #e4e4ea;
+            text-align: center;
+        }
+        div#pj_title{
+            text-align: center;
+        }
+        .project_ex{
+            margin: auto;
+            padding: auto;
+            width: 768px;
+        }
         
         @media only screen and (max-width: 750px){
             #experience-timeline:before,#experience-timeline:after{left:23px}
@@ -512,7 +543,13 @@ body.active{overflow:hidden;z-index:-1}
                 top:auto;
                 transform:none}
             footer{text-align:center}
+            .project_ex{
+                margin: auto;
+                padding: auto;
+                width: 100%;
+            }    
             .social{text-align:center}}
+            
             @media only screen and (max-width: 480px){
                 #lead-content h1{font-size:1.5em}
                 #lead-content h2{font-size:1em}
