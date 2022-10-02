@@ -488,6 +488,11 @@ body.active{overflow:hidden;z-index:-1}
             padding: auto;
             width: 768px;
         }
+
+        .faceimage{
+            width: 100px;
+            height: 120px;
+        }
         
         @media only screen and (max-width: 750px){
             #experience-timeline:before,#experience-timeline:after{left:23px}
