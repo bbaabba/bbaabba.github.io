@@ -96,6 +96,11 @@ body.active{overflow:hidden;z-index:-1}
         font-size:0.5em;
         text-transform:uppercase;}
     #mobile-menu-close i{vertical-align:middle;}
+    .pjimage {
+        width: 300px;
+        height: 300px;
+        opacity: 0.5;
+    }
 
     footer{padding:50px 0;}
     .copyright{padding-top:20px;}
