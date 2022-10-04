@@ -24,13 +24,13 @@
                 <a href="./index.html">Home</a>
             </li>
             <li>
-                <a href="#about">About Project</a>
+                <a href="#pj_title">About Project</a>
             </li>
             <li>
-                <a href="#proceed">Proceed</a>
+                <a href="#BM">Basic Model</a>
             </li>
             <li>
-                <a href="#">WTF</a>
+                <a href="#Process">Process</a>
             </li>
             <li>
                 <a href="#projects">Projects</a>
@@ -51,92 +51,108 @@
     <div class="col-md-offset-1"><h2 class="heading">About Project</h2></div>
     <div class="project_ex">
         <div class="explaindiv">
-            <h2>주제</h2>
+            <!-- <h2></h2> -->
             <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>어쩌고저쩌고</h4>
-            <p>
-                <li>
-                    코드개요
-                </li>
-            </p>
-            <div class="code-box">
-                <span class="commenttext"># tensorflow, tf.keras 임포트</span>
-                <br>
-                <span class="importtext">import</span> tensorflow as tf
-                <br>
-                <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
-                <br>
-                <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
-                <br>
-                <span class="commenttext"># helper 라이브러리 임포트</span>
-                <br>
-                <span class="importtext">import</span> numpy as np
-                <br>
-                <span class="importtext">import</span> matplotlib.pyplot as plt
-            </div>
-            코드설명
+            <h4>간단한 MNIST 손글씨 Dataset을 활용해 머신러닝과 텐서플로우에 대한 개념을 잡고, 간단한 모델을 통해 화상처리 시스템의 트레이닝을 해보고 더 좋은 모델을 찾아보자</h4>
+
         </div>
         <br><hr><br>
     </div>
-
-    <div class="col-md-offset-1"><h2 class="heading">About Project</h2></div>
+    <div class="col-md-offset-1" id="BM"><h2 class="heading">Basic Model</h2></div>
     <div class="project_ex">
         <div class="explaindiv">
-            <h2>주제</h2>
+            <!-- <h2></h2> -->
             <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>어쩌고저쩌고</h4>
-            <p>
-                <li>
-                    코드개요
-                </li>
-            </p>
-            <div class="code-box">
-                <span class="commenttext"># tensorflow, tf.keras 임포트</span>
-                <br>
-                <span class="importtext">import</span> tensorflow as tf
-                <br>
-                <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
-                <br>
-                <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
-                <br>
-                <span class="commenttext"># helper 라이브러리 임포트</span>
-                <br>
-                <span class="importtext">import</span> numpy as np
-                <br>
-                <span class="importtext">import</span> matplotlib.pyplot as plt
-            </div>
-            코드설명
-        </div>
+            <h4>MNIST 데이터셋을 불러와 간단한 머신러닝 모델을 디자인한다</h4><br><br><br>
+            <p></p>
+            <img src="images/mnist/2.png" width="400px" height="800px">
+            <br><br>
+            <li>
+                기초 모델은 그림과 같은 3개의 히든레이어를 가진 선형모델이다
+            </li>
+            <li>
+                해당 모델은 1회의 드롭아웃, 2회의 MaxPooling2D를 통해 조정되어있는 상태이며 각 레이어의 형태는 3x3의 필터를 지닌 Conv2D이다
+            </li>
+            <li>
+                각각의 레이어의 활성화 함수는 relu로 지정하였으며, loss함수는 sparse_categorical_crossentropy, Optimizer는 SGD, epochs는 1로 설정하였다.
+            </li>
+            <hr>
+            <img src="images/mnist/3.png" alt=""><br><br>
+            실험 결과는 훈련 정확도 = 0.7976, loss = 0.6346, test데이터에 대한 정확도 = 0.9522, loss = 0.1573이 나왔다.
         <br><hr><br>
+        </div>
     </div>
+    <div class="col-md-offset-1" id="Process"><h2 class="heading">Process</h2></div>
+    <div class="project_ex">
+        <div class="explaindiv">
+            <h4>Optimizer</h4><br>
+            <table>
+                <tr>
+                    <th>Basic Model - SGD</th>
+                    <th>RMSProp</th>
+                    <th>Adam</th>
+                    <th>Adamax</th>
+                    <th>Nadam</th>
+                </tr>
+                <tr>
+                    <td>acc: 0.7976, loss: 0.6346,<br>test_acc: 0.9522, test_loss: 0.1573</td>
+                    <td>acc: 0.9512, loss: 0.1515, <br>test_acc: 0.9864, test_loss: 0.0411</td>
+                    <td>acc: 0.9492, loss: 0.1629,<br>test_acc: 0.9811, test_loss: 0.0571</td>
+                    <td>acc: 0.9272, loss: 0.2416,<br>test_acc: 0.9815, test_loss: 0.0640</td>
+                    <td>acc: 0.9550, loss: 0.1437,<br>test_acc: 0.9853, test_loss: 0.0425</td>
+                </tr>
+            </table>
+            <br><br>
+            기타 조건을 두고 Optimizer를 바꿔보았다. test_acc는 RMSProp이 가장 높았다.
+            <hr><br><br>
+            <h4>Epochs</h4><br>
+            성능이 다소 떨어지는 모델 외의 RMSProp, Adam, Nadam 이 세 모델의 epochs값을 10까지 늘려 학습을 시켜보았다. <br>
+            <br>추가로 validation split을 0.2로 나누어 진행하였다. <br><br>
+            <table>
+                <tr>
+                    <th>RMSProp</th>
+                    <th>Adam</th>
+                    <th>Nadam</th>
+                </tr>
+                <tr>
+                    <td>acc: 0.9951, loss: 0.0165,<br>val_acc: 0.9915, val_loss: 0.0381</td>
+                    <td>acc: 0.9955, loss: 0.0129,<br>val_acc: 0.9919, val_loss: 0.0352</td>
+                    <td>acc: 0.9954, loss: 0.0135,<br>val_acc: 0.9898, val_loss: 0.0392</td>
+                </tr>
+            </table>
+                <br><br>
+                epochs값을 늘리니 모델의 정확도가 99%를 넘겼다. RMSProp이나 Adam의 경우 성능차이가 거의 없다고 판단, 다소 성능이 더 높은 Adam을 기본모델로 수정하여 진행하였다.
+                <hr><br><br>
+                <h4>Layer Structure</h4><br>
+                레이어 내의 구조에 대해 몇가지 수정을 해 구조개선의 여지가 있는지에 대해 알아보자 <br>
+                Layer 내의 Dropout을 삭제할 경우 <br><br>
+                <img src="images/mnist/rmdrop.png" alt=""><br><br>
+                위와같이 더 높은 정확도를 보이나 val_acc가 조금 더 낮은 경향을 띈다. 기존의 형태에 비해 과적합의 위험성이 더 높을 수 있어 Dropout은 유지하기로 판단하였다.
+                <br><br>
+                Layer 구조에 은닉층을 더해보았을 경우 <br><br>
+                <img src="images/mnist/pluslayer.png" alt="">
+                <br>epochs가 8인 시점에서 기존의 모델들보다 val_acc이 높게 나왔다<br>
+                이것으로 신경망이 복잡해질수록 모델의 성능이 더 좋아질 수 있음을 알 수 있다. <br><br>
+                활성화함수를 여러가지 섞어 사용해보기로 하였다 <br>
+                <br><br>
+                <table>
+                    <tr>
+                        <th>Basic Model - relu</th>
+                        <th>elu</th>
+                        <th>selu</th>
+                        <th>tanh</th>
+                        <th>shuffled</th>
+                    </tr>
+                    <tr>
+                        <td>acc: 0.9955, loss: 0.0129,<br>val_acc: 0.9919, val_loss: 0.0352</td>
+                        <td>acc: 0.9939, loss: 0.0210,<br>val_acc: 0.9885, val_loss: 0.0607</td>
+                        <td>acc: 0.9912, loss: 0.0322,<br>val_acc: 0.9877, val_loss: 0.0617</td>
+                        <td>acc: 0.9909, loss: 0.0270,<br>val_acc: 0.9877, val_loss: 0.0417</td>
+                        <td>acc: 0.9874, loss: 0.0382,<br>val_acc: 0.9865, val_loss: 0.0478</td>
+                    </tr>
+                </table>
     
-    <div class="col-md-offset-1"><h2 class="heading">About Project</h2></div>
-    <div class="project_ex">
-        <div class="explaindiv">
-            <h2>주제</h2>
-            <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>어쩌고저쩌고</h4>
-            <p>
-                <li>
-                    코드개요
-                </li>
-            </p>
-            <div class="code-box">
-                <span class="commenttext"># tensorflow, tf.keras 임포트</span>
-                <br>
-                <span class="importtext">import</span> tensorflow as tf
-                <br>
-                <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
-                <br>
-                <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
-                <br>
-                <span class="commenttext"># helper 라이브러리 임포트</span>
-                <br>
-                <span class="importtext">import</span> numpy as np
-                <br>
-                <span class="importtext">import</span> matplotlib.pyplot as plt
             </div>
-            코드설명
         </div>
         <br><hr><br>
     </div>
@@ -172,6 +188,38 @@
         <br><hr><br>
     </div>
 
+    <!-- <div id="pj_title">
+        <h1 font>MNIST 손글씨 분석</h1>
+        </div>
+        <br><br><br><br>
+        <div class="col-md-offset-1"><h2 class="heading">About Project</h2></div>
+        <div class="project_ex">
+            <div class="explaindiv">
+                <h2></h2>
+                <span class="education-date">Mar 2011 - Feb 2019</span>
+                <h4>간단한 MNIST 손글씨 Dataset을 통해 머신러닝과 텐서플로우에 대한 개념을 잡고, 화상처리 시스템의 트레이닝을 해보자</h4>
+                    <li>
+                        
+                    </li>
+                <div class="code-box">
+                    <span class="commenttext"># tensorflow, tf.keras 임포트</span>
+                    <br>
+                    <span class="importtext">import</span> tensorflow as tf
+                    <br>
+                    <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
+                    <br>
+                    <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
+                    <br>
+                    <span class="commenttext"># helper 라이브러리 임포트</span>
+                    <br>
+                    <span class="importtext">import</span> numpy as np
+                    <br>
+                    <span class="importtext">import</span> matplotlib.pyplot as plt
+                </div>
+                코드설명
+            </div>
+            <br><hr><br>
+        </div> -->
     <footer>
         <div class="container">
             <div class="row">
@@ -212,3 +260,69 @@
     </footer>
 </body>
 </html>
+
+
+<!-- <div class="code-box">
+    <span class="commenttext"># tensorflow, tf.keras 임포트</span>
+    <br>
+    <span class="importtext">import</span> tensorflow as tf <span class=""></span>
+    <br>
+    <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
+    <br>
+    <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
+    <br>
+    <span class="commenttext"># helper 라이브러리 임포트</span>
+    <br>
+    <span class="importtext">import</span> numpy as np
+    <br>
+    <span class="importtext">import</span> matplotlib.pyplot as plt
+</div>
+<p>머신러닝에 활용할 모듈들을 import 한다. </p>
+<br>
+
+<div class="code-box">
+    <span>mnistdata = keras.datasets.mnist</span>
+    <br>
+    <span>(train_images, train_labels), (test_images, test_labels) = mnistdata.load_data()</span>
+</div>
+<p>MNIST 데이터셋을 mnistdata 변수에 저장한다. 각각의 데이터는 train_images, train_labels, test_images, test_labels에 저장한다.</p>
+<br>
+<div class="code-box">
+    train_image = train_images.reshape((60000, 28, 28, 1))/255.0 <br>
+    test_image = test_images.reshape((10000, 28, 28, 1))/255.0 <br>
+</div>
+<p>load한 데이터의 형태를 조절한다.</p>
+<br>
+<div class="code-box">
+    checkpoint_path = 'epochs/cp--{epoch:04d}.ckpt' <br>
+    cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                save_weights_only=True, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                verbose=0, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                save_freq='epoch') <br>
+</div>
+<p>callback 값을 저장할 경로를 지정한다.</p>
+<br>
+<div class="code-box">class_names=['0','1','2','3','4','5','6','7','8','9']</div>
+<p>분류할 데이터의 class name을 미리 지정해둔다</p>
+<br>
+<div class="code-box">
+    model = models.Sequential() <br>
+    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1))) <br> 
+    model.add(layers.MaxPooling2D((2, 2))) <br>
+    model.add(layers.Conv2D(64, (3, 3), activation='relu')) <br>
+    model.add(layers.MaxPooling2D((2, 2))) <br>
+    model.add(layers.Dropout(0.2)) <br>
+    model.add(layers.Conv2D(64, (3, 3), activation='relu')) <br>
+    model.add(layers.Flatten()) <br>
+    model.add(layers.Dense(64, activation='relu')) <br>
+    model.add(layers.Dense(10, activation='softmax')) <br>
+    <br>
+    model.summary()
+</div>
+<p>기본이 될 basic model을 만든다. 각각의 층은 relu활성화 함수를 활용하며, 총3개의 은닉층이 존재한다.</p>
+<div class="code-box">
+    model.compile(optimizer='adam', <br>
+    loss='sparse_categorical_crossentropy', <br>
+    metrics=['accuracy'])
+</div>
+</div> -->

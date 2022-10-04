@@ -482,7 +482,7 @@ body.active{overflow:hidden;z-index:-1}
         }
         .explaindiv {
             margin: auto;
-            background-color: #e4e4ea;
+            /* background-color: #e4e4ea; */
             text-align: center;
         }
         div#pj_title{
