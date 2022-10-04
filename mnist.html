@@ -33,13 +33,7 @@
                 <a href="#Process">Process</a>
             </li>
             <li>
-                <a href="#projects">Projects</a>
-            </li>
-            <li>
-                <a href="#skills">Skills</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
+                <a href="#Result">Result</a>
             </li>
         </ul>
     </header> 
@@ -133,7 +127,7 @@
                 <img src="images/mnist/pluslayer.png" alt="">
                 <br>epochs가 8인 시점에서 기존의 모델들보다 val_acc이 높게 나왔다<br>
                 이것으로 신경망이 복잡해질수록 모델의 성능이 더 좋아질 수 있음을 알 수 있다. <br><br>
-                활성화함수를 여러가지 섞어 사용해보기로 하였다 <br>
+                활성화함수를 여러가지 섞어 사용해보기로 하였다. <br>
                 <br><br>
                 <table>
                     <tr>
@@ -151,42 +145,43 @@
                         <td>acc: 0.9874, loss: 0.0382,<br>val_acc: 0.9865, val_loss: 0.0478</td>
                     </tr>
                 </table>
-    
-            </div>
+                <br>
+                여러가지 활성화 함수를 활용해보았지만 해당모델에서는 relu함수가 가장 효과가 좋았다. <hr><br><br>
+
+            <h4>ImageDataGenerator</h4>
+            이미지의 데이터를 여러가지 생성하여 학습을 진행하여 과적합을 방지하고 특징을 더 효율적으로 뽑아낼 수 있는지 확인한다 <br><br>
+            <img src="images/mnist/IDG.png" alt="" width="500px" height="500px"> <br><br>
+            ImageDataGenerator 함수를 통해 위와같이 이미지를 한번 불러올때마다 위치, 각도를 랜덤하게 이동하는 방식을 채용하였다 <br>
+            지나친 이미지 조작은 특징 추출에 불리하다 판단하여 각 이동량은 상하좌우 10%, 회전각도 10도로 설정하였다 <br><br>
+            <img src="images/mnist/IMGp.png" alt=""> <br><br>
+            이미지들로 얼마나 많이 학습해야 과적합이 발생하는지 알아보기 위해 epochs값을 50까지 늘려 학습시켜보았다 <br><br>
+            <img src="images/mnist/ep50.png" alt=""> <br><br>
+            가장 높은 validation 데이터의 accuracy와 loss 값은 0.9930, 0.0295였다. <br>
+            기존 방식으로는 보통 epochs값이 20을 넘어가면 과적합으로 인해 val_acc값이 감소하는 현상이 발생하였는데, <br>
+            Training 데이터를 조금씩만 바꿔주는것으로 더 효과적이고 정확한 일반화 모델을 만들어 낼 수 있음을 알 수 있었다. <br>
+        </div>
         </div>
         <br><hr><br>
     </div>
 
-    <div class="col-md-offset-1"><h2 class="heading">About Project</h2></div>
+    <div class="col-md-offset-1" id="Result"><h2 class="heading">Result</h2></div>
     <div class="project_ex">
         <div class="explaindiv">
-            <h2>주제</h2>
-            <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>어쩌고저쩌고</h4>
-            <p>
-                <li>
-                    코드개요
-                </li>
-            </p>
-            <div class="code-box">
-                <span class="commenttext"># tensorflow, tf.keras 임포트</span>
-                <br>
-                <span class="importtext">import</span> tensorflow as tf
-                <br>
-                <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
-                <br>
-                <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
-                <br>
-                <span class="commenttext"># helper 라이브러리 임포트</span>
-                <br>
-                <span class="importtext">import</span> numpy as np
-                <br>
-                <span class="importtext">import</span> matplotlib.pyplot as plt
-            </div>
-            코드설명
+            <h2>결과</h2>
+            <img src="images/mnist/valacc.png" alt="" width="350px"> <img src="images/mnist/valloss.png" alt="" width="350px"> <br> <br>
+            각 epochs 값에 대한 accuracy, loss값을 표로 나타내었다. <br>
+            <br><br>
+            최종 모델의 Test 결과값
+            <img src="images/mnist/ep50test.png" alt=""> <br> <br>
+            ImageDataGenerator모델을 통해 학습이미지를 증식시켜 Test_acc의 값을 0.9948까지 끌어올릴 수 있었다. <br> 이는 모델의 일반화가 잘 되었다고 판단할 수 있다. <br> <br>
+            <br>
+            Deeplearning 모델의 여러 요소에 대해 배우고 학습하는 기회가 되었다. <br><br>
+            해당 모델을 여러가지 방법으로 바꿔보고 요소들을 다뤄보면서 다양한 함수들과 방식들을 접할 수 있었고 <br>
+            그것들을 공부하는 기회가 되어 좋았던것같다.
         </div>
         <br><hr><br>
     </div>
+    
 
     <!-- <div id="pj_title">
         <h1 font>MNIST 손글씨 분석</h1>
@@ -225,7 +220,7 @@
             <div class="row">
                 <div class="col-sm-5 copyright">
                     <p>
-                        Copyright &copy; <span id="current-year">2022</span> YOUR NAME
+                        Copyright &copy; <span id="current-year">2022</span> a
                     </p>
                 </div>
                 <div class="col-sm-2 top">
