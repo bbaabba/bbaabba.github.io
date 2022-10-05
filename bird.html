@@ -72,7 +72,7 @@
             </li>
             <hr>
             <img src="images/mnist/3.png" alt=""><br><br>
-            실험 결과는 훈련 정확도 = 0.7976, loss = 0.6346, Test데이터에 대한 accuracy 는 0.9522, loss 는 0.1573이 나왔다.
+            실험 결과는 훈련 정확도 = 0.7976, loss = 0.6346, test데이터에 대한 정확도 = 0.9522, loss = 0.1573이 나왔다.
         <br><hr><br>
         </div>
     </div>
@@ -98,7 +98,7 @@
             </table>
             <br><br>
             기타 조건을 두고 Optimizer를 바꿔보았다. test_acc는 RMSProp이 가장 높았다.
-            <hr><br>
+            <hr><br><br>
             <h4>Epochs</h4><br>
             성능이 다소 떨어지는 모델 외의 RMSProp, Adam, Nadam 이 세 모델의 epochs값을 10까지 늘려 학습을 시켜보았다. <br>
             <br>추가로 validation split을 0.2로 나누어 진행하였다. <br><br>
@@ -116,7 +116,7 @@
             </table>
                 <br><br>
                 epochs값을 늘리니 모델의 정확도가 99%를 넘겼다. RMSProp이나 Adam의 경우 성능차이가 거의 없다고 판단, 다소 성능이 더 높은 Adam을 기본모델로 수정하여 진행하였다.
-                <hr><br>
+                <hr><br><br>
                 <h4>Layer Structure</h4><br>
                 레이어 내의 구조에 대해 몇가지 수정을 해 구조개선의 여지가 있는지에 대해 알아보자 <br>
                 Layer 내의 Dropout을 삭제할 경우 <br><br>
@@ -146,7 +146,7 @@
                     </tr>
                 </table>
                 <br>
-                여러가지 활성화 함수를 활용해보았지만 해당모델에서는 relu함수가 가장 효과가 좋았다. <hr><br>
+                여러가지 활성화 함수를 활용해보았지만 해당모델에서는 relu함수가 가장 효과가 좋았다. <hr><br><br>
 
             <h4>ImageDataGenerator</h4>
             이미지의 데이터를 여러가지 생성하여 학습을 진행하여 과적합을 방지하고 특징을 더 효율적으로 뽑아낼 수 있는지 확인한다 <br><br>
@@ -255,69 +255,3 @@
     </footer>
 </body>
 </html>
-
-
-<!-- <div class="code-box">
-    <span class="commenttext"># tensorflow, tf.keras 임포트</span>
-    <br>
-    <span class="importtext">import</span> tensorflow as tf <span class=""></span>
-    <br>
-    <span class="importtext">from</span> tensorflow <span class="importtext">import</span> keras
-    <br>
-    <span class="importtext">from</span> tensorflow.keras <span class="importtext">import</span> datasets, layers, models
-    <br>
-    <span class="commenttext"># helper 라이브러리 임포트</span>
-    <br>
-    <span class="importtext">import</span> numpy as np
-    <br>
-    <span class="importtext">import</span> matplotlib.pyplot as plt
-</div>
-<p>머신러닝에 활용할 모듈들을 import 한다. </p>
-<br>
-
-<div class="code-box">
-    <span>mnistdata = keras.datasets.mnist</span>
-    <br>
-    <span>(train_images, train_labels), (test_images, test_labels) = mnistdata.load_data()</span>
-</div>
-<p>MNIST 데이터셋을 mnistdata 변수에 저장한다. 각각의 데이터는 train_images, train_labels, test_images, test_labels에 저장한다.</p>
-<br>
-<div class="code-box">
-    train_image = train_images.reshape((60000, 28, 28, 1))/255.0 <br>
-    test_image = test_images.reshape((10000, 28, 28, 1))/255.0 <br>
-</div>
-<p>load한 데이터의 형태를 조절한다.</p>
-<br>
-<div class="code-box">
-    checkpoint_path = 'epochs/cp--{epoch:04d}.ckpt' <br>
-    cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                save_weights_only=True, <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                verbose=0, <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                save_freq='epoch') <br>
-</div>
-<p>callback 값을 저장할 경로를 지정한다.</p>
-<br>
-<div class="code-box">class_names=['0','1','2','3','4','5','6','7','8','9']</div>
-<p>분류할 데이터의 class name을 미리 지정해둔다</p>
-<br>
-<div class="code-box">
-    model = models.Sequential() <br>
-    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1))) <br> 
-    model.add(layers.MaxPooling2D((2, 2))) <br>
-    model.add(layers.Conv2D(64, (3, 3), activation='relu')) <br>
-    model.add(layers.MaxPooling2D((2, 2))) <br>
-    model.add(layers.Dropout(0.2)) <br>
-    model.add(layers.Conv2D(64, (3, 3), activation='relu')) <br>
-    model.add(layers.Flatten()) <br>
-    model.add(layers.Dense(64, activation='relu')) <br>
-    model.add(layers.Dense(10, activation='softmax')) <br>
-    <br>
-    model.summary()
-</div>
-<p>기본이 될 basic model을 만든다. 각각의 층은 relu활성화 함수를 활용하며, 총3개의 은닉층이 존재한다.</p>
-<div class="code-box">
-    model.compile(optimizer='adam', <br>
-    loss='sparse_categorical_crossentropy', <br>
-    metrics=['accuracy'])
-</div>
-</div> -->
