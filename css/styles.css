@@ -480,11 +480,7 @@ body.active{overflow:hidden;z-index:-1}
             font-weight:900;
             font-size: 1.05em;
         }
-        .explaindiv {
-            margin: auto;
-            /* background-color: #e4e4ea; */
-            text-align: center;
-        }
+        
         div#pj_title{
             text-align: center;
         }
@@ -492,6 +488,12 @@ body.active{overflow:hidden;z-index:-1}
             margin: auto;
             padding: auto;
             width: 768px;
+            text-align: center;
+        }
+        #no_mp{
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
         }
 
         .faceimage{
@@ -525,6 +527,10 @@ body.active{overflow:hidden;z-index:-1}
             #lead-content h2{font-size:1.75em}
             #about{text-align:center}
             #about p{text-align:left}}
+            #fixlist{
+                width: 992px;
+            }
+
         @media only screen and (max-width: 768px){
             header{
                 position:fixed;

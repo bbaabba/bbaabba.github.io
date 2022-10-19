@@ -47,44 +47,93 @@
         <div class="explaindiv">
             <!-- <h2></h2> -->
             <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>간단한 MNIST 손글씨 Dataset을 활용해 머신러닝과 텐서플로우에 대한 개념을 잡고, 간단한 모델을 통해 화상처리 시스템의 트레이닝을 해보고 더 좋은 모델을 찾아보자</h4>
+            <h4>OCR 기능을 활용한 문서의 전자화가 대중화되어 있다.한글과 같은 문자의 활용도가 상대적으로 높지만, <br> 숫자 데이터도 분야에 따라서 주요한 수단으로 활용된다.<br><br>
+                간단한 MNIST 손글씨 Dataset을 활용해 머신러닝과 텐서플로우에 대한 개념을 잡고, 간단한 모델을 통해 화상처리 시스템의 트레이닝을 해보고 더 좋은 모델을 찾아보자</h4>
+                <br><br>
+                <h5>  - 사용도구 : Tensorflow, keras <br>
+                    - 사용언어 : python, 리눅스 기초 명령어(폴더 경로, 폴더 생성 등) <br>
+                    - 데이터 셋 : MNIST
+                </h5>
 
         </div>
         <br><hr><br>
     </div>
     <div class="col-md-offset-1" id="BM"><h2 class="heading">Basic Model</h2></div>
     <div class="project_ex">
-        <div class="explaindiv">
-            <!-- <h2></h2> -->
-            <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>MNIST 데이터셋을 불러와 간단한 머신러닝 모델을 디자인한다</h4><br><br><br>
-            <p></p>
-            <img src="images/mnist/2.png" width="400px" height="800px">
-            <br><br>
-            <li>
-                기초 모델은 그림과 같은 3개의 히든레이어를 가진 선형모델이다
-            </li>
-            <li>
-                해당 모델은 1회의 드롭아웃, 2회의 MaxPooling2D를 통해 조정되어있는 상태이며 각 레이어의 형태는 3x3의 필터를 지닌 Conv2D이다
-            </li>
-            <li>
-                각각의 레이어의 활성화 함수는 relu로 지정하였으며, loss함수는 sparse_categorical_crossentropy, Optimizer는 SGD, epochs는 1로 설정하였다.
-            </li>
-            <hr>
-            <img src="images/mnist/3.png" alt=""><br><br>
-            실험 결과는 훈련 정확도 = 0.7976, loss = 0.6346, Test데이터에 대한 accuracy 는 0.9522, loss 는 0.1573이 나왔다.
-        <br><hr><br>
+        <h4>베이스라인을 구축하여 기본적인 성능테스트를 실행한다</h4><br><br><br>
+        <div class="container" id="fixlist">
+            <div class="row">
+                <div class="col-xs-5">
+                    <img src="images/mnist/2.png" width="400px" height="800px">
+                </div>
+                <br><br>
+                <div class="col-xs-3">
+                    <li>
+                        Sequential형태의 CNN
+                    </li>
+                    <br>
+                    <li>
+                        필터 크기가 3,3인 Convolution2D와 필터크기가 2,2인 MaxPolling2D, 0.2의 dropout 을 활용한 구조
+                    </li>
+                    <br>
+                    <li>
+                        활용 activation function = relu
+                    </li>
+                    <br>
+                    <li>
+                        활용 optimizer = adam
+                    </li>
+                    <br>
+                    <li>
+                        활용 Loss function = sqarse_categorigal crossentropy
+                    </li>
+                    <br>
+                    <li>
+                        노드 개수 :  32, 64, 64, 64, 10로 총 parameter의 수는 93,322
+
+                    </li>
+                </div>
+            </div>
         </div>
+        <hr>
+        <img src="images/mnist/basicline_rs.png" alt=""><br><br>
+        epochs 값 = 1 일때, accuracy의 값은 95.34%가 나왔음 <br> test image를 통한 테스트 결과 정확도 약 98.4%
+        <br><br>
+        <div class="container" id="no_mp">
+            <div class="row">
+                    <img src="images/mnist/fix/01.png" alt="">
+                    <img src="images/mnist/fix/02.png" alt="">
+            </div>
+        </div>
+        <br><br>
+        epochs값을 10까지 늘렸을 경우, accuracy값 99.62% evaluate의 accuracy 값 99.17%로 준수한 성능향상을 보임. <br>
+        epochs값이 10을 넘어갈 경우 evaluate의 accuacy값이 더 낮아져 과적합의 위험이 있다고 판단하였다
+        <br><br><br>
+        <img src="images/mnist/fix/03.png" width="100%" alt="">
+        <br> <br>
+        각각의 데이터셋에 대한 train, test 이미지의 정확도는 위의 표와 같았다. <br>
+        정확도의 변동폭이 크지 않아 과적합 된 모델이라고 말할 순 없지만, <br> eval_acc이 가장 높은 5번 epoch의 가중치를 가진 모델이 가장 일반화가 잘 되었다고 볼 수 있다.
     </div>
+</div>
+    <br><hr><br>
     <div class="col-md-offset-1" id="Process"><h2 class="heading">Process</h2></div>
     <div class="project_ex">
+        <div class="explaindiv">
+            모든 epoch마다 test데이터를 하나하나 대조하여 일반화를 판단하기보다, train데이터를 분할하여 valitaion 데이터를 따로 만들기로 결정하였다. <br><br>
+            <img src="images/mnist/fix/04.png" alt=""><br>
+            <img src="images/mnist/fix/05.png" alt="">
+            <br><br>
+            20%만큼의 데이터셋 분할로 인해 train 데이터셋의 정확도는 99.62% -> 99.55%, test데이터셋의 정확도는 99.16% -> 98.87%만큼의 하락이 있었다
+            <br>가장 val_acc값이 잘 나온 epoch 7의 test데이터의 정확도는 99.21%였다 <br>
+        </div>
+        <hr>
         <div class="explaindiv">
             <h4>Optimizer</h4><br>
             <table>
                 <tr>
-                    <th>Basic Model - SGD</th>
+                    <th>SGD</th>
                     <th>RMSProp</th>
-                    <th>Adam</th>
+                    <th>Basic Model - Adam</th>
                     <th>Adamax</th>
                     <th>Nadam</th>
                 </tr>
@@ -115,16 +164,16 @@
                 </tr>
             </table>
                 <br><br>
-                epochs값을 늘리니 모델의 정확도가 99%를 넘겼다. RMSProp이나 Adam의 경우 성능차이가 거의 없다고 판단, 다소 성능이 더 높은 Adam을 기본모델로 수정하여 진행하였다.
+                epochs값을 늘리니 모델의 정확도가 99%를 넘겼다. RMSProp이나 Adam의 경우 성능차이가 거의 없다고 판단, 다소 성능이 더 높은 Adam을 기본모델로 그대로 진행하였다.
                 <hr><br>
                 <h4>Layer Structure</h4><br>
                 레이어 내의 구조에 대해 몇가지 수정을 해 구조개선의 여지가 있는지에 대해 알아보자 <br>
                 Layer 내의 Dropout을 삭제할 경우 <br><br>
-                <img src="images/mnist/rmdrop.png" alt=""><br><br>
+                <img src="images/mnist/rmdrop.png" alt="" width="100%"><br><br>
                 위와같이 더 높은 정확도를 보이나 val_acc가 조금 더 낮은 경향을 띈다. 기존의 형태에 비해 과적합의 위험성이 더 높을 수 있어 Dropout은 유지하기로 판단하였다.
                 <br><br>
                 Layer 구조에 은닉층을 더해보았을 경우 <br><br>
-                <img src="images/mnist/pluslayer.png" alt="">
+                <img src="images/mnist/pluslayer.png" alt="" width="100%">
                 <br>epochs가 8인 시점에서 기존의 모델들보다 val_acc이 높게 나왔다<br>
                 이것으로 신경망이 복잡해질수록 모델의 성능이 더 좋아질 수 있음을 알 수 있다. <br><br>
                 활성화함수를 여러가지 섞어 사용해보기로 하였다. <br>
@@ -146,8 +195,45 @@
                     </tr>
                 </table>
                 <br>
-                여러가지 활성화 함수를 활용해보았지만 해당모델에서는 relu함수가 가장 효과가 좋았다. <hr><br>
+                여러가지 활성화 함수를 활용해보았지만 해당모델에서는 relu함수가 가장 효과가 좋았다. <br><hr><br>
+                <h4>레이어 내의 모든 Maxpooling, Dropout 삭제</h4>
+                <br><br>
+                <img src="images/mnist/fix/07.png" alt=""><br><br>
+                <div class="col-xs-15">
+                    <li> param 값이 기존 모델보다 약 2배가량 증가하였다. </li>
+                    <li> train데이터의 정확도는 빠르게 올라갔지만, validation 데이터에 대해서는 정확도가 일정 이상 올라가지 못하고 기존의 모델과 큰 차이를 보이지 못했다.</li>
+                    <li> 무작정 parameter값을 올리기보다, Dropout같은 함수를 사용하는 것이 일반화에 더욱 유리함을 알 수 있었다. </li>
+                </div>
+                <br><hr><br>
+                <h4>hidden layer 내에 새로운 layer 추가</h4>
+                <img src="images/mnist/fix/08.png" alt=""><br><br>
+                <div class="col-xs-15">
+                    <li> Conv2D(64, (3,3), relu)형태의 레이어를 추가하였다</li>
+                    <li> val_acc을 볼 경우 기존모델에 비해 확연한 차이를 볼 수 있었다.</li>
+                    <li> eval_acc값도 99.27%로 validation 데이터를 분리하기 전보다 더욱 높은 수치를 보여주었다.</li>
+                    <li>deep하고 복잡한 신경망일수록 높은 정확도를 가질 수 있음을 알게 되었다.</li>
+                </div>
 
+                <br><hr><br>
+                <h4>Conv2D 필터 크기의 변화</h4>
+                <img src="images/mnist/fix/09.png" alt=""><br><br>
+                <div class="col-xs-15">
+                    <li> 베이스모델의 Conv2D 레이어들의 필터를 3,3에서 2,2 4,4로 변화시켜보았다.</li>
+                    <li> 기존의 필터를 사용하는것보다 큰 필터가 소폭 더 좋은 성능을 보여주었다.</li>
+                </div>
+                <img src="images/mnist/fix/10.png" alt=""><br><br>
+                <div class="col-xs-15">
+                    <li> 모델의 필터가 변화함에 따라 hidden layer의 마지막 shape가 영향을 크게 받는다고 생각되어 padding 을 same으로 두고 다시 돌려보았다.</li>
+                    <li> 데이터의 손실량이 줄어들고 output shape의 크기가 커짐에 따라 정확도가 눈에 띄게 차이가 났다.</li>
+                </div>
+                <br><hr><br>
+                <h4>각 레이어에 Batchnormalization 추가</h4>
+                <img src="images/mnist/fix/11.png" alt=""><br><br>
+                <div class="col-xs-15">
+                    <li> 베이스가 되는 Batchsize=32로는 모수가 적어 일반화에 취약할 수 있다 판단하여 Batchnomalization을 통해 정규화를 진행하였다.</li>
+                    <li> 베이스 모델에 비해               val_acc = 98.93% -> 99.02%, eval_acc = 98.87% -> 99.16%       로 성능이 향상되었다.</li>
+                </div>
+                <br><hr><br>
             <h4>ImageDataGenerator</h4>
             이미지의 데이터를 여러가지 생성하여 학습을 진행하여 과적합을 방지하고 특징을 더 효율적으로 뽑아낼 수 있는지 확인한다 <br><br>
             <img src="images/mnist/IDG.png" alt="" width="500px" height="500px"> <br><br>
@@ -167,13 +253,56 @@
     <div class="col-md-offset-1" id="Result"><h2 class="heading">Result</h2></div>
     <div class="project_ex">
         <div class="explaindiv">
-            <h2>결과</h2>
-            <img src="images/mnist/valacc.png" alt="" width="350px"> <img src="images/mnist/valloss.png" alt="" width="350px"> <br> <br>
+            <h4>개선된 레이어 구조</h4>
+            <div class="container" id="fixlist">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <img src="images/mnist/fix/06.png" width="400px" height="800px">
+                    </div>
+                    <br><br>
+                    <div class="col-xs-3">
+                        <li>
+                            Sequential형태의 CNN
+                        </li>
+                        <br>
+                        <li>
+                            필터 크기가 (4,4), padding=same 인 Convolution2D와 필터크기가 2,2인 MaxPolling2D, 0.2의 dropout 을 활용한 구조
+                        </li>
+                        <br>
+                        <li>
+                            활용 activation function = relu
+                        </li>
+                        <br>
+                        <li>
+                            활용 optimizer = adam
+                        </li>
+                        <br>
+                        <li>
+                            활용 Loss function = sqarse_categorigal crossentropy
+                        </li>
+                        <br>
+                        <li>
+                            Batchnormalization을 통한 배치 일반화
+                        </li>
+                        <br>
+                        <li>
+                            ImageDataGenerator를 통한 입력 데이터 다변화
+                        </li>
+                        <br>
+                    </div>
+                </div>
+            </div>
+    <hr><br>
+            <img src="images/mnist/fix/12.png" alt="" width="350px"> <img src="images/mnist/fix/13.png" alt="" width="350px"> <br> <br>
             각 epochs 값에 대한 accuracy, loss값을 표로 나타내었다. <br>
             <br><br>
-            최종 모델의 Test 결과값
-            <img src="images/mnist/ep50test.png" alt=""> <br> <br>
-            ImageDataGenerator모델을 통해 학습이미지를 증식시켜 Test_acc의 값을 0.9948까지 끌어올릴 수 있었다. <br> 이는 모델의 일반화가 잘 되었다고 판단할 수 있다. <br> <br>
+            <h4>최종 모델의 Test 결과값</h4>
+            해당 모델의 최종값은 acc=99.70%,
+                val_acc=99.37%,
+                eval_acc=99.42%가 나왔다
+            <br> 이는 모델의 일반화가 잘 되었다고 판단할 수 있다. <br>
+            또한 val_acc이 가장 높은 epoch값은 26이었으며, val_acc=99.48%,	eval_acc=99.54%가 나왔다.
+            <br>
             <br><hr><br>
             Deeplearning 모델의 여러 요소에 대해 배우고 학습하는 기회가 되었다. <br><br>
             해당 모델을 여러가지 방법으로 바꿔보고 요소들을 다뤄보면서 다양한 함수들과 방식들을 접할 수 있었고 <br>
