@@ -75,21 +75,22 @@
                 약 2025만개의 Parameter
             </li>
             <li>
-                활용 optimizer = SGD
+                활용 optimizer = SGD, epochs = 10
             </li>
             <li>
                 모든 이미지는 Image Data Generator를 통해 이미지를 무작위 생성하여 학습한다
             </li>
             <hr>
-            <img src="images/mnist/3.png" alt=""><br><br>
-            실험 결과는 훈련 정확도 = 0.7976, loss = 0.6346, test데이터에 대한 정확도 = 0.9522, loss = 0.1573이 나왔다.
+            <img src="images/bird/03.png" alt=""    ><br><br>
+            실험 결과는 훈련 정확도 = 0.6615, loss = 1.414, val_acc=0.6635, val_loss=1.3540 이 나왔다.
         <br><hr><br>
         </div>
     </div>
     <div class="col-md-offset-1" id="Process"><h2 class="heading">Process</h2></div>
     <div class="project_ex">
         <div class="explaindiv">
-            <h4>Optimizer</h4><br>
+            <h4>Using Models</h4><br>
+            Keras API문서에 소개되어 있는 Application의 여러가지 모델들을 가지고 
             <table>
                 <tr>
                     <th>Basic Model - SGD</th>
