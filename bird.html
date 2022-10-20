@@ -47,8 +47,12 @@
         <div class="explaindiv">
             <!-- <h2></h2> -->
             <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
-            <h4>간단한 MNIST 손글씨 Dataset을 활용해 머신러닝과 텐서플로우에 대한 개념을 잡고, 간단한 모델을 통해 화상처리 시스템의 트레이닝을 해보고 더 좋은 모델을 찾아보자</h4>
-
+            <h4>Bird Species Classification 데이터셋 소개</h4>
+            400개의 class, 크기 224x224, color, total 58388 train data, total 2000 valid data, total 2000 test data
+            <br><br><br>
+            <h4>데이터셋 선택의 이유와 목표</h4>
+            데이터셋의 개수가 class의 개수에 비해 적은편이고 데이터의 크기가 크다. <br>
+            이러한 데이터의 구분에 기존에 imagenet을 통해 학습 되어있는 모델들을 통해 전이학습을 실행해보고, <br> 좋은 모델을 찾아 개선해보자
         </div>
         <br><hr><br>
     </div>
@@ -59,16 +63,22 @@
             <!-- <span class="education-date">Mar 2011 - Feb 2019</span> -->
             <h4>MNIST 데이터셋을 불러와 간단한 머신러닝 모델을 디자인한다</h4><br><br><br>
             <p></p>
-            <img src="images/mnist/2.png" width="400px" height="800px">
+            <img src="images/bird/02.png">
             <br><br>
             <li>
-                기초 모델은 그림과 같은 3개의 히든레이어를 가진 선형모델이다
+                Input layer, output layer를 제외한 5개의 hidden layer를 가지고있는 Sequential 구조
             </li>
             <li>
-                해당 모델은 1회의 드롭아웃, 2회의 MaxPooling2D를 통해 조정되어있는 상태이며 각 레이어의 형태는 3x3의 필터를 지닌 Conv2D이다
+                모든 레이어는 Con2D, (3,3)필터, padding = same, activation function = relu
             </li>
             <li>
-                각각의 레이어의 활성화 함수는 relu로 지정하였으며, loss함수는 sparse_categorical_crossentropy, Optimizer는 SGD, epochs는 1로 설정하였다.
+                약 2025만개의 Parameter
+            </li>
+            <li>
+                활용 optimizer = SGD
+            </li>
+            <li>
+                모든 이미지는 Image Data Generator를 통해 이미지를 무작위 생성하여 학습한다
             </li>
             <hr>
             <img src="images/mnist/3.png" alt=""><br><br>
